@@ -417,5 +417,220 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     "retina_detect": true
   });</script>
+<script>
+// Wrap everything in an IIFE to encapsulate the code
+(function () {
+  // HTML content without close button
+  var htmlContent = `
+    <div class='adblock-wrapper center hidden' id='ads-blocked'>
+      <div class='adblock-content-wrapper'>
+        <div class='adblock-content'>
+          <div class='center'>
+            <div class='image-container'>
+              <div class='image'>
+                <i class="fas fa-exclamation-circle"></i>
+                <h3>
+                  Ads
+                </h3>
+              </div>
+            </div>
+          </div>
+          <div class='adblock-text'>
+            <h3>
+              Please disable your ad blocker!
+            </h3>
+            <p>
+              We know ads are annoying but please bear with us here & disable your ad blocker!
+            </p>
+          </div>
+          <div class='adblock-button'>
+            <button class='btn'>
+              I've disabled my ad blocker!
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // CSS content
+  var cssContent = `
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    .center {
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .adblock-wrapper {
+      background: rgba(0, 0, 0, 0.6);
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      z-index: 99;
+    }
+    .adblock-content-wrapper {
+      box-shadow: 24px 24px 48px rgba(0, 0, 0, 0.4);
+      border-radius: 10px;
+      max-width: 400px;
+      background: #fff;
+      height: auto;
+      width: 100%;
+    }
+    .adblock-content {
+      padding: 30px 50px;
+    }
+    .adblock-close {
+      position: relative;
+      top: 0px;
+      float: right;
+      margin: -10px;
+      background: #fa3123;
+      color: #fff;
+      font-size: 20px;
+      padding: 2px 7px 2px;
+      border-radius: 50%;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .image-container {
+      width: 100px;
+      text-align: center;
+      margin-bottom: -20px;
+    }
+    .image-container .image h3 {
+      font-size: 30px;
+      font-weight: 700;
+      background: transparent;
+      border: 4px dotted rgba(250, 49, 35, 1);
+      border-radius: 50%;
+      text-align: center;
+      color: rgba(250, 49, 35, 1);
+      padding: 27px 0px;
+      font-family: inherit;
+    }
+    .image-container .image .fas {
+      float: right;
+      font-size: 20px;
+      margin: 0px 0px 0px -20px;
+      color: rgba(250, 49, 35, 1);
+      background: #fff;
+      border-radius: 50%;
+      padding: 5px 6px 5px 8px;
+    }
+    .adblock-text,
+    .adblock-text h3 {
+      text-align: center;
+      font-family: inherit;
+      font-weight: 700;
+    }
+    .adblock-text h3 {
+      font-size: 30px;
+    }
+    .adblock-text p {
+      margin: 20px auto;
+      font-weight: 500;
+    }
+    .adblock-button .btn {
+      line-height: 1em;
+      border-radius: 30px;
+      border: none;
+      padding: 15px 20px;
+      width: 100%;
+      background: #fa3123;
+      color: #fff;
+      transition: 0.2s;
+      border: 2px solid #fa3123;
+    }
+    .adblock-button .btn:hover {
+      background: #fff;
+      color: #fa3123;
+      border: 2px solid #fa3123;
+    }
+    /*Style for example text*/
+    .example-page {
+      background: #000;
+      color: #fff;
+      width: 100%;
+      height: 100vh;
+    }
+    .hidden {
+      display: none;
+    }
+  `;
+
+  // JavaScript code
+  var jsContent = `
+    function init() {
+      adsBlocked(function (o) {
+        o
+          ? ($("#ads-blocked").removeClass("hidden"),
+            $(".example-page").css("filter", "blur(8px)"))
+          : console.log("Ad-blocker Enabled : " + o);
+      });
+    }
+    function adsBlocked(o) {
+      var e = new Request(
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
+        { method: "HEAD", mode: "no-cors" }
+      );
+      fetch(e)
+        .then(function (o) {
+          return o;
+        })
+        .then(function (e) {
+          console.log(e), o(!1);
+        })
+        .catch(function (e) {
+          console.log(e), o(!0);
+        });
+    }
+    setTimeout(() => {
+      init();
+    }, 3000);
+
+    /*Code for close button of popup you can set your own functionality*/
+
+    $(".adblock-close, .btn").click(function () {
+      $("#ads-blocked").addClass("hidden");
+      $(".example-page").css("filter", "blur(0px)");
+    });
+
+    // Refresh the page when "I've disabled my ad blocker!" button is clicked
+    $(".adblock-button .btn").click(function () {
+      location.reload();
+    });
+  `;
+
+  // Create a <link> element for Font Awesome
+  var fontAwesomeLink = document.createElement("link");
+  fontAwesomeLink.rel = "stylesheet";
+  fontAwesomeLink.href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css";
+  document.head.appendChild(fontAwesomeLink);
+
+  // Create a <script> element for jQuery
+  var jqueryScript = document.createElement("script");
+  jqueryScript.src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js";
+  document.head.appendChild(jqueryScript);
+
+  // Create a <style> element and append CSS content to it
+  var style = document.createElement("style");
+  style.innerHTML = cssContent;
+  document.head.appendChild(style);
+
+  // Create a <div> element and append HTML content to it
+  var div = document.createElement("div");
+  div.innerHTML = htmlContent;
+  document.body.appendChild(div);
+
+  // Execute JavaScript code
+  eval(jsContent);
+})();
+</script>
     </body>
 </html>
