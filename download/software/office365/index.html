@@ -81,14 +81,12 @@ canvas {
     <div class='adblock-wrapper center hidden' id='ads-blocked'>
       <div class='adblock-content-wrapper'>
         <div class='adblock-content'>
-          <div class='center'>
-            <div class='image-container'>
-              <div class='image'>
-                <i class="fas fa-exclamation-circle"></i>
-                <h3>
-                  Ads
-                </h3>
-              </div>
+          <div class='image-container'>
+            <div class='image'>
+              <i class="fas fa-exclamation-circle"></i>
+              <h3>
+                Ads
+              </h3>
             </div>
           </div>
           <div class='adblock-text'>
@@ -114,45 +112,31 @@ canvas {
     body {
       margin: 0;
       padding: 0;
-    }
-    .center {
-      height: 100%;
-      padding: 0;
-      margin: 0;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
     .adblock-wrapper {
       background: rgba(0, 0, 0, 0.6);
-      width: 100vw;
-      height: 100vh;
       position: fixed;
-      z-index: 99;
+      z-index: 9999;
+    }
+    .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
     }
     .adblock-content-wrapper {
       box-shadow: 24px 24px 48px rgba(0, 0, 0, 0.4);
       border-radius: 10px;
       max-width: 400px;
       background: #fff;
-      height: auto;
       width: 100%;
     }
     .adblock-content {
       padding: 30px 50px;
-    }
-    .adblock-close {
-      position: relative;
-      top: 0px;
-      float: right;
-      margin: -10px;
-      background: #fa3123;
-      color: #fff;
-      font-size: 20px;
-      padding: 2px 7px 2px;
-      border-radius: 50%;
-      font-weight: 700;
-      cursor: pointer;
     }
     .image-container {
       width: 100px;
