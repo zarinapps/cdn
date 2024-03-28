@@ -1,6 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Adblocker Trun off start -->
+<script>
+(function () {
+    var styles = `
+        /* Animation */
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px)
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes rubberBand {
+            from {
+                transform: scale3d(1, 1, 1)
+            }
+            30% {
+                transform: scale3d(1.25, 0.75, 1)
+            }
+            40% {
+                transform: scale3d(0.75, 1.25, 1)
+            }
+            50% {
+                transform: scale3d(1.15, 0.85, 1)
+            }
+            65% {
+                transform: scale3d(.95, 1.05, 1)
+            }
+            75% {
+                transform: scale3d(1.05, .95, 1)
+            }
+            to {
+                transform: scale3d(1, 1, 1)
+            }
+        }
+
+        /* Say Hi to Adblock */
+        #zarinadblockdefender {
+            background: rgba(0, 0, 0, 0.65);
+            position: fixed;
+            margin: auto;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            overflow: auto;
+            z-index: 999999;
+            animation: fadeInDown 1s;
+        }
+
+        #zarinadblockdefender .clasicadsmodal {
+            background: #fff;
+            color: #333;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+            padding: 40px;
+            border-radius: 10px;
+            margin: 10% auto;
+            animation: rubberBand 1s;
+        }
+
+        #zarinadblockdefender h2 {
+            margin-bottom: 20px;
+            color: #e3482d;
+        }
+
+        #zarinadblockdefender p {
+            margin-bottom: 20px;
+        }
+
+        #zarinadblockdefender button {
+            padding: 10px 20px;
+            border: 0;
+            background: #e3482d;
+            color: #fff;
+            margin: 20px 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all .3s;
+        }
+
+        #zarinadblockdefender button:hover {
+            background: #ff6347;
+        }
+
+        #zarinadblockdefender a {
+            color: #e3482d;
+            text-decoration: none;
+        }
+
+        #zarinadblockdefender a:hover {
+            text-decoration: underline;
+        }
+
+        @media(max-width: 768px) {
+            #zarinadblockdefender .clasicadsmodal {
+                width: calc(100% - 20px);
+                margin: 10px auto;
+                padding: 15px;
+            }
+        }
+    `;
+
+    var styleElement = document.createElement("style");
+    styleElement.type = "text/css";
+    styleElement.appendChild(document.createTextNode(styles));
+    document.head.appendChild(styleElement);
+
+    function displayCheckingAdblocker() {
+        var checkingAdblocker = decodeURIComponent('%3c%70%20%73%74%79%6c%65%3d%22%74%65%78%74%2d%61%6c%69%67%6e%3a%20%63%65%6e%74%65%72%3b%22%3e%43%6f%64%65%20%77%69%74%68%20%26%23%78%31%46%34%39%33%3b%20%62%79%20%3c%73%74%72%6f%6e%67%3e%3c%61%20%68%72%65%66%3d%22%68%74%74%70%73%3a%2f%2f%61%6e%61%73%2e%7a%61%72%69%6e%2e%73%6f%6c%75%74%69%6f%6e%73%2f%22%20%74%61%72%67%65%74%3d%22%5f%62%6c%61%6e%6b%22%20%72%65%6c%3d%22%6e%6f%6f%70%65%6e%65%72%22%3e%4d%75%68%61%6d%6d%61%64%20%41%6e%61%73%3c%2f%61%3e%3c%2f%73%74%72%6f%6e%67%3e%3c%2f%70%3e');
+        
+        var adBlockDiv = document.createElement("div");
+        adBlockDiv.id = "zarinadblockdefender";
+        
+        var clasicadsmodal = document.createElement("div");
+        clasicadsmodal.className = "clasicadsmodal";
+        
+        var h2 = document.createElement("h2");
+        h2.textContent = "Ad Blocker Detected";
+        clasicadsmodal.appendChild(h2);
+        
+        var p1 = document.createElement("p");
+        p1.textContent = "Please consider pausing your ad blocker to access our site fully. Your support helps sustain our platform and provide valuable content. Thank you for your cooperation!";
+        clasicadsmodal.appendChild(p1);
+        
+        var button = document.createElement("button");
+        button.className = "refresh";
+        button.textContent = "Refresh Page";
+        clasicadsmodal.appendChild(button);
+        
+        var googleadsdata = document.createElement("p");
+        googleadsdata.innerHTML = checkingAdblocker;
+        clasicadsmodal.appendChild(googleadsdata);
+        
+        adBlockDiv.appendChild(clasicadsmodal);
+        document.body.appendChild(adBlockDiv);
+        document.body.style.overflow = "hidden";
+
+        var refreshButton = adBlockDiv.querySelector(".refresh");
+        refreshButton.addEventListener("click", function (event) {
+            event.preventDefault();
+            location.reload();
+        });
+    }
+
+    var adScript = document.createElement("script");
+    adScript.type = "text/javascript";
+    adScript.async = true;
+    adScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+    adScript.onerror = function () {
+        displayCheckingAdblocker();
+        window.adblock = true;
+    };
+
+    var existingScript = document.getElementsByTagName("script")[0];
+    existingScript.parentNode.insertBefore(adScript, existingScript);
+})();
+</script>
+<!-- Adblocker Trun off Ends -->
 <meta property="og:title" content="Office 365" />
 <meta property="og:image" content="https://cdn.zarin.solutions/logos/office365.png" />
 <meta property="og:description" content="By Muhammad Anas" />
