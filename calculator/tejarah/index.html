@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distribution Calculator</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            box-sizing: border-box;
+            direction: ltr;
+        }
+        .calculator {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .calculator h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .calculator input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            text-align: left;
+        }
+        .calculator h3 {
+            color: #555;
+            margin-top: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .calculator table {
+            width: 100%;
+            margin-top: 10px;
+            direction: ltr;
+            text-align: left;
+        }
+        .calculator table th, .calculator table td {
+            padding: 10px;
+            color: #444;
+            text-align: left;
+        }
+        .calculator table th {
+            background-color: #f9f9f9;
+            font-weight: 600;
+        }
+        .calculator table td {
+            text-align: left;
+        }
+        .total-amount {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007BFF;
+            text-align: right;
+            margin-top: 10px;
+        }
+        @media screen and (max-width: 768px) {
+            .calculator {
+                padding: 15px;
+            }
+            .calculator h2 {
+                font-size: 22px;
+            }
+            .calculator table th, .calculator table td {
+                font-size: 14px;
+            }
+            .calculator input[type="number"] {
+                font-size: 14px;
+            }
+        }
+        @media screen and (max-width: 480px) {
+            .calculator {
+                padding: 10px;
+            }
+            .calculator h2 {
+                font-size: 20px;
+            }
+            .calculator table th, .calculator table td {
+                font-size: 12px;
+            }
+            .calculator input[type="number"] {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>Distribution Calculator</h2>
+        <input type="number" id="totalAmount" placeholder="Enter total amount" oninput="calculateDistribution()">
+        
+        <div id="companyTotal" class="total-amount">Company (45%): 0.00</div>
+        <h3>Company Distribution (45%)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Percentage</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody id="companyDistributionTable">
+                <tr>
+                    <td>Charity</td>
+                    <td>10%</td>
+                    <td id="charity">0</td>
+                </tr>
+                <tr>
+                    <td>Reward</td>
+                    <td>20%</td>
+                    <td id="reward">0</td>
+                </tr>
+                <tr>
+                    <td>Franchises</td>
+                    <td>5%</td>
+                    <td id="franchises">0</td>
+                </tr>
+                <tr>
+                    <td>Expenses</td>
+                    <td>10%</td>
+                    <td id="expenses">0</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div id="levelTotal" class="total-amount">Levels (55%): 0.00</div>
+        <h3>Level Distribution (55%)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Level</th>
+                    <th>Percentage</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody id="levelDistributionTable">
+                <tr>
+                    <td>1</td>
+                    <td>20%</td>
+                    <td id="level1">0</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>10%</td>
+                    <td id="level2">0</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>8%</td>
+                    <td id="level3">0</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>6%</td>
+                    <td id="level4">0</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>5%</td>
+                    <td id="level5">0</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>3%</td>
+                    <td id="level6">0</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>3%</td>
+                    <td id="level7">0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function calculateDistribution() {
+            const totalAmount = parseFloat(document.getElementById('totalAmount').value) || 0;
+
+            const companyAmount = totalAmount * 0.45;
+            document.getElementById('companyTotal').innerText = `Company (45%): ${companyAmount.toFixed(2)}`;
+            
+            document.getElementById('charity').innerText = (companyAmount * 0.10).toFixed(2);
+            document.getElementById('reward').innerText = (companyAmount * 0.20).toFixed(2);
+            document.getElementById('franchises').innerText = (companyAmount * 0.05).toFixed(2);
+            document.getElementById('expenses').innerText = (companyAmount * 0.10).toFixed(2);
+
+            const levelAmount = totalAmount * 0.55;
+            document.getElementById('levelTotal').innerText = `Levels (55%): ${levelAmount.toFixed(2)}`;
+
+            const percentages = [0.20, 0.10, 0.08, 0.06, 0.05, 0.03, 0.03];
+            for (let i = 0; i < percentages.length; i++) {
+                const levelDistribution = (levelAmount * percentages[i]).toFixed(2);
+                document.getElementById(`level${i+1}`).innerText = levelDistribution;
+            }
+        }
+    </script>
+</body>
+</html>
